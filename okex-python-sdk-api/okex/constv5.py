@@ -21,6 +21,8 @@ SERVER_TIMESTAMP_URL = '/api/general/v3/time'
 
 # account
 ACCOUNT_POS_RISK = '/api/v5/account/account-position-risk'
+ACCOUNT_BALANCE = '/api/v5/account/balance'
+ACCOUNT_POSITION = '/api/v5/account/positions'
 
 WALLET_INFO = '/api/account/v3/wallet'
 CURRENCY_INFO = '/api/account/v3/wallet/'

@@ -1,3 +1,5 @@
 
 okex-python-sdk-api/.idea/inspectionProfiles/profiles_settings.xml
 *.xml
+*.xml
+*.pyc

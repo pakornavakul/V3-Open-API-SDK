@@ -385,9 +385,9 @@ async def unsubscribe_without_login(url, channels, timestamp):
         print(timestamp + f"recv: {res}")
 
 
-api_key = AppConfig["OKEx"]["api_key_main"]
-secret_key = AppConfig["OKEx"]["api_secret_main"]
-passphrase = "00145216"
+# api_key = AppConfig["OKEx"]["api_key_main"]
+# secret_key = AppConfig["OKEx"]["api_secret_main"]
+# passphrase = "00145216"
 
 # url = 'wss://real.okex.com:8443/ws/v3'
 public_url = 'wss://ws.okex.com:8443/ws/v5/public'
@@ -397,14 +397,20 @@ private_url = 'wss://ws.okex.com:8443/ws/v5/private'
 
 loop = asyncio.get_event_loop()
 
-channels = {}
-channels['channel'] = 'books'
-channels['instId'] = 'BTC-USDT-SWAP'
+channel_1 = {}
+channel_1['channel'] = 'books'
+channel_1['instId'] = 'BTC-USDT-SWAP'
+
+channel_2 = {}
+channel_2['channel'] = 'books'
+channel_2['instId'] = 'ETH-USDT-SWAP'
+
+channels = [channel_1,channel_2]
 
 # 公共数据 不需要登录（行情，K线，交易数据，资金费率，限价范围，深度数据，标记价格等频道）
-# loop.run_until_complete(subscribe_without_login(public_url, [channels]))
+loop.run_until_complete(subscribe_without_login(public_url, channels))
 
 # 个人数据 需要登录（用户账户，用户交易，用户持仓等频道）
-loop.run_until_complete(subscribe(private_url, api_key, passphrase, secret_key, [channels]))
+# loop.run_until_complete(subscribe(private_url, api_key, passphrase, secret_key, channels))
 
 loop.close()
