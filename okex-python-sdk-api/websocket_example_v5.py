@@ -14,6 +14,8 @@ def get_timestamp():
     t = now.isoformat("T", "milliseconds")
     return t + "Z"
 
+def ts_To_datetime(ts:float):
+    return datetime.datetime.fromtimestamp(ts)
 
 def get_server_time():
     url = "https://www.okex.com/api/general/v3/time"

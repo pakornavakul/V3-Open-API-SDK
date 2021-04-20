@@ -153,5 +153,194 @@ class RestAPIV5(Client):
             params['instType'] =instType
         if ccy != "":
             params['ccy'] =ccy
+        if mgnMode != "":
+            params['mgnMode'] =mgnMode
+        if ctType != "":
+            params['ctType'] =ctType
+        if type != "":
+            params['type'] =type
+        if subType != "":
+            params['subType'] =subType
+        if after != "":
+            params['after'] =after
+        if before != "":
+            params['before'] =before
+        if limit != "":
+            params['limit'] =limit
 
+        if len(params)>0:
+            return self._request_with_params(GET, ACCOUNT_BILLS, params)
+        else:
+        # pass
+            return self._request_without_params(GET, ACCOUNT_BILLS)
+
+    def get_billing_detail_3M(self,instType:str="",ccy:str="",mgnMode:str="",ctType:str="",
+                                 type:str="",subType:str="",after:str="",before:str="",limit:str="100"):
+
+        params ={}
+        if instType != "":
+            params['instType'] =instType
+        if ccy != "":
+            params['ccy'] =ccy
+        if mgnMode != "":
+            params['mgnMode'] =mgnMode
+        if ctType != "":
+            params['ctType'] =ctType
+        if type != "":
+            params['type'] =type
+        if subType != "":
+            params['subType'] =subType
+        if after != "":
+            params['after'] =after
+        if before != "":
+            params['before'] =before
+        if limit != "":
+            params['limit'] =limit
+
+        if len(params)>0:
+            return self._request_with_params(GET, ACCOUNT_BILLS_3M, params)
+        else:
+        # pass
+            return self._request_without_params(GET, ACCOUNT_BILLS_3M)
+
+    def get_server_time(self):
+            return self._request_without_params(GET, SERVER_TIMESTAMP_URL)
+
+
+    def place_order(self,instId:str,tdMode:str,side:str,posSide:str,ordType:str,sz:str,px:str="",ccy:str="",
+                    clOrdId:str="",tag:str="",reduceOnly:str=False):
+
+
+        params ={}
+
+        params['instId']=instId
+        params['tdMode']=tdMode
+        params['side']=side
+        params['posSide']=posSide
+        params['ordType']=ordType
+        params['sz']=sz
+        if px !="":
+            params['px']=px
+        if ccy !="":
+            params['ccy']=ccy
+        if clOrdId !="":
+            params['clOrdId']=clOrdId
+        if tag !="":
+            params['tag']=tag
+
+        params['reduceOnly']=reduceOnly
+
+
+        return self._request_with_params(POST, PLACE_ORDER, params)
+
+    def place_batch_order(self, instId: str, tdMode: str, side: str, posSide: str, ordType: str, sz: str, px: str = "",
+                    ccy: str = "",
+                    clOrdId: str = "", tag: str = "", reduceOnly:str=False):
         pass
+        # params = {}
+        #
+        # params['instId'] = instId
+        # params['tdMode'] = tdMode
+        # params['side'] = side
+        # params['posSide'] = posSide
+        # params['ordType'] = ordType
+        # params['sz'] = sz
+        # if px != "":
+        #     params['px'] = px
+        # if ccy != "":
+        #     params['ccy'] = ccy
+        # if clOrdId != "":
+        #     params['clOrdId'] = clOrdId
+        # if tag != "":
+        #     params['tag'] = tag
+        # if reduceOnly != "":
+        #     params['reduceOnly'] = reduceOnly
+        #
+        # return self._request_with_params(POST, PLACE_ORDER, params)
+
+    # @staticmethod
+    # def create_placeorder_dict
+
+    def cancel_order(self,instId:str,ordId:str="",clOrdId:str=""):
+        params ={}
+
+        params['instId']=instId
+        if ordId !="":
+            params['ordId']=ordId
+        if clOrdId !="":
+            params['clOrdId']=clOrdId
+
+
+        return self._request_with_params(POST, CANCEL_ORDER, params)
+
+    def amend_order(self,instId:str,cxlOnFail:bool=False,ordId:str="",clOrdId:str="",reqId:str="",
+                    newSz:str="",newPx:str=""):
+
+        params ={}
+        params['instId'] =instId
+        params['cxlOnFail']=cxlOnFail
+        if ordId !="":
+            params['ordId']=ordId
+        if clOrdId !="":
+            params['clOrdId']=clOrdId
+        if reqId !="":
+            params['reqId']=reqId
+        if newSz !="":
+            params['newSz']=newSz
+        if newPx !="":
+            params['newPx']=newPx
+
+        return self._request_with_params(POST, AMEND_ORDER, params)
+
+
+    def close_positions(self,instId:str,posSide:str="",mgnMode:str="",ccy:str=""):
+
+        '''
+        So I cannot close specific amount...?
+        :param instId:
+        :param posSide:
+        :param mgnMode:
+        :param ccy:
+        :return:
+        '''
+        params ={}
+        params['instId'] =instId
+        if posSide !="":
+            params['posSide'] =posSide
+        if mgnMode !="":
+            params['mgnMode'] =mgnMode
+        if ccy !="":
+            params['ccy'] =ccy
+        pass
+
+
+    def get_order_list(self,instType:str="",uly:str="",instId:str="",ordType:str="",state:str="",
+                       after:str="",before:str="",limit:str=""):
+        params ={}
+
+        if instType !="":
+            params['instType'] =instType
+        if instId !="":
+            params['instId'] =instId
+        if uly !="":
+            params['uly'] =uly
+        if ordType !="":
+            params['ordType'] =ordType
+        if state !="":
+            params['state'] =state
+        if after !="":
+            params['after'] =after
+        if before !="":
+            params['before'] =before
+        if limit !="":
+            params['limit'] =limit
+
+        if len(params)>0:
+            return self._request_with_params(GET, LIST_ORDER, params)
+        else:
+            return self._request_without_params(GET, LIST_ORDER)
+
+    def get_system_status(self):
+        return self._request_without_params(GET, SERVER_STATUS_URL)
+
+    def get_instruments(self):
