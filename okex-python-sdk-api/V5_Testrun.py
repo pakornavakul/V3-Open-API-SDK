@@ -26,7 +26,8 @@ if __name__ == '__main__':
     OKEx5_API = OKEx5.RestAPIV5(api_key, secret_key, passphrase, False)
 
     # response = OKEx5_API.get_positions(instrument_name_str="FIL-USDT-SWAP,LUNA-USDT-SWAP")
-    response = OKEx5_API.get_billing_detail_7days(instType="SWAP",type="8")
+    # response = OKEx5_API.get_billing_detail_7days(instType="SWAP",type="8")
     # response = OKEx5_API.get_billing_detail_7days()
+    response = OKEx5_API.get_instruments(instType="SWAP")
     print(response)
-    print()
+    # print()

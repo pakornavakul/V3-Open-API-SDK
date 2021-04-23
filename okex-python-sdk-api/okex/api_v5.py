@@ -273,6 +273,10 @@ class RestAPIV5(Client):
 
         return self._request_with_params(POST, CANCEL_ORDER, params)
 
+    def cancel_multiple_orders(self,list_of_dictionary):
+        return self._request_with_params(POST, CANCEL_BATCH_ORDER, list_of_dictionary)
+
+
     def amend_order(self,instId:str,cxlOnFail:bool=False,ordId:str="",clOrdId:str="",reqId:str="",
                     newSz:str="",newPx:str=""):
 
@@ -296,6 +300,7 @@ class RestAPIV5(Client):
     def close_positions(self,instId:str,posSide:str="",mgnMode:str="",ccy:str=""):
 
         '''
+        Closes all specified instrument's orders via market order...
         So I cannot close specific amount...?
         :param instId:
         :param posSide:
@@ -312,6 +317,9 @@ class RestAPIV5(Client):
         if ccy !="":
             params['ccy'] =ccy
         pass
+
+
+        return self._request_with_params(POST, CLOSE_ALL_POSITION, params)
 
 
     def get_order_list(self,instType:str="",uly:str="",instId:str="",ordType:str="",state:str="",
@@ -343,4 +351,21 @@ class RestAPIV5(Client):
     def get_system_status(self):
         return self._request_without_params(GET, SERVER_STATUS_URL)
 
-    def get_instruments(self):
+    def get_instruments(self,instType:str,uly:str="",instId:str=""):
+
+        params = {}
+        params['instType'] = instType
+        if uly != "":
+            params['uly'] = uly
+        if instId != "":
+            params["instId"] = instId
+        return self._request_with_params(GET, GET_INSTRUMENTS, params)
+
+    def get_funding_rate(self,instId:str):
+
+        params = {}
+        params["instId"] = instId
+        return self._request_with_params(GET, GET_FUNDINGRATE, params)
+
+
+

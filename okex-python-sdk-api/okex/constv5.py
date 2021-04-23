@@ -30,5 +30,11 @@ ACCOUNT_BILLS_3M = '/api/v5/account/bills-archive'
 #Trade
 PLACE_ORDER = '/api/v5/trade/order'
 CANCEL_ORDER = '/api/v5/trade/cancel-order'
+CANCEL_BATCH_ORDER = '/api/v5/trade/cancel-batch-orders'
+CLOSE_ALL_POSITION = '/api/v5/trade/close-position'
 AMEND_ORDER = '/api/v5/trade/amend-order'
 LIST_ORDER = '/api/v5/trade/orders-pending'
+
+#Data
+GET_INSTRUMENTS = '/api/v5/public/instruments'
+GET_FUNDINGRATE = '/api/v5/public/funding-rate'
